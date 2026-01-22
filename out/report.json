@@ -1,0 +1,131 @@
+{
+  "summary": {
+    "total": 2,
+    "pass_count": 2,
+    "pass_rate": 1.0,
+    "mean_total_score": 1.0,
+    "metric_means": {
+      "ItemQuality": 1.0,
+      "AnswerConsistency": 1.0,
+      "ExplanationQuality": 1.0,
+      "FormatCompliance": 1.0,
+      "ExpertAlignment": 1.0
+    }
+  },
+  "cases": [
+    {
+      "id": "q1",
+      "success": true,
+      "total_score": 1.0,
+      "metrics": [
+        {
+          "name": "ItemQuality",
+          "score": 1.0,
+          "success": true,
+          "reason": "offline smoke test",
+          "threshold": 0.7,
+          "evaluation_model": "offline-judge"
+        },
+        {
+          "name": "AnswerConsistency",
+          "score": 1.0,
+          "success": true,
+          "reason": "offline smoke test",
+          "threshold": 0.7,
+          "evaluation_model": "offline-judge"
+        },
+        {
+          "name": "ExplanationQuality",
+          "score": 1.0,
+          "success": true,
+          "reason": "offline smoke test",
+          "threshold": 0.7,
+          "evaluation_model": "offline-judge"
+        },
+        {
+          "name": "FormatCompliance",
+          "score": 1.0,
+          "success": true,
+          "reason": "offline smoke test",
+          "threshold": 0.7,
+          "evaluation_model": "offline-judge"
+        },
+        {
+          "name": "ExpertAlignment",
+          "score": 1.0,
+          "success": true,
+          "reason": "offline smoke test",
+          "threshold": 0.7,
+          "evaluation_model": "offline-judge"
+        }
+      ],
+      "metadata": {
+        "id": "q1",
+        "question_type": "single_choice",
+        "subject": "内科",
+        "difficulty": null,
+        "actual_parse_success": true,
+        "actual_parse_warning": "缺少选项字段",
+        "expert_parse_success": true,
+        "expert_parse_warning": null
+      }
+    },
+    {
+      "id": "q2",
+      "success": true,
+      "total_score": 1.0,
+      "metrics": [
+        {
+          "name": "ItemQuality",
+          "score": 1.0,
+          "success": true,
+          "reason": "offline smoke test",
+          "threshold": 0.7,
+          "evaluation_model": "offline-judge"
+        },
+        {
+          "name": "AnswerConsistency",
+          "score": 1.0,
+          "success": true,
+          "reason": "offline smoke test",
+          "threshold": 0.7,
+          "evaluation_model": "offline-judge"
+        },
+        {
+          "name": "ExplanationQuality",
+          "score": 1.0,
+          "success": true,
+          "reason": "offline smoke test",
+          "threshold": 0.7,
+          "evaluation_model": "offline-judge"
+        },
+        {
+          "name": "FormatCompliance",
+          "score": 1.0,
+          "success": true,
+          "reason": "offline smoke test",
+          "threshold": 0.7,
+          "evaluation_model": "offline-judge"
+        },
+        {
+          "name": "ExpertAlignment",
+          "score": 1.0,
+          "success": true,
+          "reason": "offline smoke test",
+          "threshold": 0.7,
+          "evaluation_model": "offline-judge"
+        }
+      ],
+      "metadata": {
+        "id": "q2",
+        "question_type": "single_choice",
+        "subject": "外科",
+        "difficulty": null,
+        "actual_parse_success": true,
+        "actual_parse_warning": "缺少选项字段",
+        "expert_parse_success": true,
+        "expert_parse_warning": null
+      }
+    }
+  ]
+}

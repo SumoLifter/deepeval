@@ -1,0 +1,3 @@
+id,success,total_score,ItemQuality_score,AnswerConsistency_score,ExplanationQuality_score,FormatCompliance_score,ExpertAlignment_score,ItemQuality_reason,AnswerConsistency_reason,ExplanationQuality_reason,FormatCompliance_reason,ExpertAlignment_reason
+q1,1,1.0,1.0,1.0,1.0,1.0,1.0,offline smoke test,offline smoke test,offline smoke test,offline smoke test,offline smoke test
+q2,1,1.0,1.0,1.0,1.0,1.0,1.0,offline smoke test,offline smoke test,offline smoke test,offline smoke test,offline smoke test

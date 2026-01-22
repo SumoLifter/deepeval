@@ -2,18 +2,39 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 from pathlib import Path
 from typing import Any, Dict, Optional
 
 from deepeval.apps.med_exam_geval.runner import run_evaluation
 from deepeval.apps.med_exam_geval.external_llm import ExternalOpenAICompatibleLLM
 from deepeval.apps.med_exam_geval.report import write_csv_report, write_json_report
+from deepeval.models import DeepEvalBaseLLM
 
 
 def _parse_json_obj(s: Optional[str]) -> Optional[Dict[str, Any]]:
     if not s:
         return None
     return json.loads(s)
+
+
+class _OfflineJudgeLLM(DeepEvalBaseLLM):
+    def __init__(self):
+        super().__init__("offline-judge")
+
+    def load_model(self, *args, **kwargs):
+        return self
+
+    def get_model_name(self, *args, **kwargs) -> str:
+        return "offline-judge"
+
+    def generate(self, prompt: str, schema=None, **kwargs):
+        if schema is not None:
+            return schema.model_validate({"score": 10, "reason": "offline smoke test"})
+        return '{"score": 10, "reason": "offline smoke test"}'
+
+    async def a_generate(self, prompt: str, schema=None, **kwargs):
+        return self.generate(prompt, schema=schema, **kwargs)
 
 
 def main() -> None:
@@ -30,6 +51,11 @@ def main() -> None:
         help="Report format.",
     )
     ap.add_argument("--judge-model", default=None, help="Judge model name (optional).")
+    ap.add_argument(
+        "--offline-judge",
+        action="store_true",
+        help="Use a built-in deterministic judge for smoke testing (no external API calls).",
+    )
     ap.add_argument(
         "--judge-external",
         action="store_true",
@@ -61,6 +87,8 @@ def main() -> None:
 
     weights = _parse_json_obj(args.weights)
     judge_model = args.judge_model
+    if args.offline_judge:
+        judge_model = _OfflineJudgeLLM()
     if args.judge_external:
         if not args.judge_external_model:
             raise SystemExit("--judge-external-model is required when --judge-external is set")
@@ -71,6 +99,11 @@ def main() -> None:
         if not args.predict_external_model:
             raise SystemExit("--predict-external-model is required when --predict-external is set")
         predict_model = ExternalOpenAICompatibleLLM(model=args.predict_external_model)
+
+    if judge_model is None and not os.getenv("OPENAI_API_KEY"):
+        raise SystemExit(
+            "No judge is configured. Set OPENAI_API_KEY, or use --judge-external, or use --offline-judge for smoke test."
+        )
 
     result = run_evaluation(
         dataset_path=Path(args.data),
